@@ -1,0 +1,22 @@
+import os ;  
+ androidNDKRoot = [ os.environ ANDROID_NDK ] ;
+ androidAPIVer  = [ os.environ ANDROID_API_VER ] ;
+  using gcc : android :  
+    $(androidNDKRoot)/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-gcc :
+    <compileflags>--sysroot=$(androidNDKRoot)/platforms/$(androidAPIVer)/arch-arm
+    <compileflags>-mthumb  
+    <compileflags>-Os  
+    <compileflags>-fno-strict-aliasing  
+    <compileflags>-O2  
+    <compileflags>-DNDEBUG  
+    <compileflags>-g  
+    <compileflags>-lstdc++  
+    <compileflags>-I$(androidNDKRoot)/sources/cxx-stl/gnu-libstdc++/4.9/include  
+    <compileflags>-I$(androidNDKRoot)/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi/include  
+    <compileflags>-I$(androidNDKRoot)/platforms/$(androidAPIVer)/arch-arm/usr/include 
+    <compileflags>-D__GLIBC__   
+    <compileflags>-D__arm__  
+    <archiver>$(androidNDKRoot)/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ar  
+    <ranlib>$(androidNDKRoot)/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ranlib  
+      ;  
+

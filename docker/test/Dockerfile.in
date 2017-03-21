@@ -1,0 +1,5 @@
+FROM ubuntu:latest
+MAINTAINER me
+
+#include "imagemagick.docker"
+#include "redis.docker"
