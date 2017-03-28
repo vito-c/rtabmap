@@ -1,3 +1,4 @@
+FROM %REPLACE_FROM%
 ################################################################################
 # Make PCL
 ###############################################################################
@@ -27,8 +28,8 @@ RUN ${android-cmake} --no-warn -DANDROID_API_LEVEL=${ANDROID_API_VERSION} \
     -DFLANN_INCLUDE_DIR=/mnt/sources/dependencies/flann/src/cpp \
     -DBUILD_SHARED_LIBS=OFF \
     -DFLANN_LIBRARY=${FLANN_LIBRARY} \
-    -DLIBUSB_10_LIBRARY=/mnt/compiled/dependencies/libusb-1.0/libusb-1.0.a \
-    -DLIBUSB_10_INCLUDE_DIR=/mnt/compiled/dependencies/libusb-1.0 \
+    -DLIBUSB_10_LIBRARY=/opt/libusb-1.0/libusb-1.0.a \
+    -DLIBUSB_10_INCLUDE_DIR=/opt/libusb-1.0 \
     -DBUILD_global_tests=OFF \
     -DBUILD_people=OFF .. && \
     make -j2

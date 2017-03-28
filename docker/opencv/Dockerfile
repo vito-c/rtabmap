@@ -1,6 +1,8 @@
+FROM %REPLACE_FROM%
 ################################################################################
 # OPEN CV
 ###############################################################################
 WORKDIR /mnt/compiled/dependencies/
-COPY openCV openCV
+# TODO: download this from somewhere?
+COPY opencv opencv
 

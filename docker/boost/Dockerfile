@@ -1,9 +1,9 @@
-FROM ubuntu:latest
+FROM %REPLACE_FROM%
 MAINTAINER Vito
 ################################################################################
 # BOOST
 ###############################################################################
-ENV BOOST_ANDROID=/mnt/compiled/dependencies/boost
+ENV BOOST_ANDROID=/opt
 
 WORKDIR /mnt/sources/dependencies
 RUN curl -L https://github.com/boostorg/boost/archive/boost-1.48.0.tar.gz | tar -zx
@@ -25,15 +25,15 @@ COPY user-config.jam /root/user-config.jam
 # Boost.Python
 # Boost.Regex ICU support
 
-ENV BOOST_ROOT=/mnt/compiled/dependencies/boost
-ENV BOOST_INCLUDEDIR=/mnt/compiled/dependencies/boost/include
-ENV BOOST_LIBRARYDIR=/mnt/compiled/dependencies/boost/lib
+ENV BOOST_ROOT=/opt/boost
+ENV BOOST_INCLUDEDIR=/opt/boost/include
+ENV BOOST_LIBRARYDIR=/opt/boost/lib
 
 RUN cd boost && \
     ./bootstrap.sh && \
     ./b2 --without-python -q \
     -s NO_BZIP2=1 \
-    --prefix=/mnt/compiled/dependencies/boost  \
+    --prefix=/opt/boost  \
     variant=release link=static runtime-link=static \
     include=/opt/${ANDROID_NDK_VERSION}/platforms/${ANDROID_API_VERSION}/arch-arm/usr/include \
     cxxflags="-fexceptions -frtti -fpic -ffunction-sections -funwind-tables -D__ARM_ARCH_5__ -D__ARM_ARCH_5T__ -D__ARM_ARCH_5E__ -D__ARM_ARCH_5TE__ -Wno-psabi -march=armv5te -mtune=xscale -msoft-float -mthumb -Os -fomit-frame-pointer -fno-strict-aliasing -finline-limit=64 -Wa,--noexecstack -DANDROID -D__ANDROID__ -DNDEBUG -O2 -g" \

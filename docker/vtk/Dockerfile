@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM %REPLACE_FROM%
 MAINTAINER Vito
 ################################################################################
 # VTK
